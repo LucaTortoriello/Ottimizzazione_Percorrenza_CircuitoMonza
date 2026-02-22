@@ -101,7 +101,7 @@ f1_times = {
 while true
     fprintf('\n---------------------------------------------------------\n');
     fprintf('  MENU PRINCIPALE\n');
-    fprintf('    [1]  Cerca da statistiche F1 (tempi storici Monza)\n');
+    fprintf('    [1]  Cerca da statistiche F1 (giri veloci in gara: Monza)\n');
     fprintf('    [2]  Inserisci un tempo personalizzato\n');
     fprintf('    [0]  Esci\n');
     fprintf('---------------------------------------------------------\n');
@@ -126,7 +126,7 @@ while true
                 sec2mmss(ts));
         end
         fprintf('\n');
-        idx_str = input('Seleziona ID del tempo F1 (es: 1): ', 's');
+        idx_str = input('Seleziona ID del tempo o pilota F1 (es: 1): ', 's');
         idx = str2double(strtrim(idx_str));
         if isnan(idx) || idx<1 || idx>size(f1_times,1)
             fprintf('[ERRORE] ID non valido.\n'); continue;
