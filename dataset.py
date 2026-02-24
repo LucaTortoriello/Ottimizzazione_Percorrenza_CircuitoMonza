@@ -35,7 +35,7 @@ x_acc = np.array([202.33, dist_frenata, dist_frenata, 305.0, 229.0,
 x_const = L - x_acc - x_brake
 
 # --- 2. PARAMETRI FISICI DELLA VETTURA ---
-m = 730.0       # Massa della vettura (kg)
+m = 722.0       # Massa della vettura (kg)
 g = 9.81        # Accelerazione di gravità (m/s^2)
 k_aero = 0.387  # Coefficiente di resistenza aerodinamica
 epsilon = 6e-6  # Coefficiente di consumo specifico (litri per velocità^2)
