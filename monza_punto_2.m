@@ -23,7 +23,7 @@ g = 9.81;
 
 k_aero = 0.387;
 
-mu = 1.5;
+mu = 3.2;
 F_grip = mu * m * g;
 rho = 224.62;
 
@@ -90,23 +90,11 @@ end
 T_total = sum(t_settore);
 Consumo_Giro = sum(c_settore);
 
-%% 5bis) CONTROLLO VINCOLO CARBURANTE GARA (53 giri <= 145 L)
-fuel_limit = 145;          % [L] limite massimo disponibile in gara
-n_giri = 53;
 
-Consumo_Gara = Consumo_Giro * n_giri;
-
-if Consumo_Gara > fuel_limit + 1e-9   % tolleranza numerica
-    fprintf('\n[WARNING] Vincolo carburante VIOLATO!\n');
-    fprintf('          Consumo gara stimato: %.2f L  >  Limite: %.2f L\n', Consumo_Gara, fuel_limit);
-    fprintf('          Aumenta W_consumo per penalizzare il consumo e ridurre la velocità ottima.\n\n');
-else
-    fprintf('\n[OK] Vincolo carburante rispettato: %.2f L <= %.2f L\n\n', Consumo_Gara, fuel_limit);
-end
 
 %% 6) STAMPA REPORT
 fprintf('\n========================================================================================\n');
-fprintf('         REPORT MONZA - PUNTO 2 (TEMPO + CONSUMO)   W = %g\n', W_consumo);
+fprintf('                 REPORT MONZA - PUNTO 2 (TEMPO + CONSUMO)   W = %g\n', W_consumo);
 fprintf('========================================================================================\n');
 fprintf('%-15s | %-8s | %-10s | %-10s | %-10s\n', ...
     'Settore', 'L [m]', 'Vpeak [km/h]', 'Tempo [s]', 'Consumo [L]');
@@ -121,6 +109,19 @@ fprintf('-----------------------------------------------------------------------
 fprintf('TEMPO TOTALE SUL GIRO: %.3f s\n', T_total);
 fprintf('CONSUMO PER GIRO:      %.4f L\n', Consumo_Giro);
 fprintf('CONSUMO GARA (53 giri):%.2f L\n', Consumo_Giro * 53);
+%% 5bis) CONTROLLO VINCOLO CARBURANTE GARA (53 giri <= 145 L)
+fuel_limit = 145;          % [L] limite massimo disponibile in gara
+n_giri = 53;
+
+Consumo_Gara = Consumo_Giro * n_giri;
+
+if Consumo_Gara > fuel_limit + 1e-9   % tolleranza numerica
+    fprintf('\n[WARNING] Limite carburante NON rispettato!\n');
+    fprintf('          Consumo gara stimato: %.2f L  >  Limite: %.2f L\n', Consumo_Gara, fuel_limit);
+    fprintf('          Aumenta W_consumo per penalizzare il consumo e ridurre la velocità ottima.\n');
+else
+    fprintf('\nLimite carburante rispettato: %.2f L <= %.2f L\n', Consumo_Gara, fuel_limit);
+end
 fprintf('========================================================================================\n');
 
 %% ===================== FUNZIONI LOCALI =====================
@@ -183,8 +184,3 @@ function [c, ceq] = vincoli_fisici(v_peak, xa, xb, m, k_aero, F_grip, v_lim)
     end
 end
 
-%% 7) GRAFICI
-% Qui puoi riusare i grafici del tuo codice originale:
-% - velocità vs distanza
-% - consumo cumulativo vs distanza
-% - bar chart consumo per settore
