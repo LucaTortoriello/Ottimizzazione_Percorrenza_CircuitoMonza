@@ -117,9 +117,7 @@ def solve(mu, W):
     return T
 
 # --- 3. ESECUZIONE DELLO SWEEP (GENERAZIONE DATI) ---
-# mu va da 1.0 a 3.5 con passo 0.2
 mu_vals = np.round(np.arange(1.0, 3.6, 0.2), 2)
-# W va da 0.4 a 20.0 con passo 0.2
 W_vals = np.round(np.arange(0.4, 20.2, 0.2), 2)
 
 total = len(mu_vals) * len(W_vals)

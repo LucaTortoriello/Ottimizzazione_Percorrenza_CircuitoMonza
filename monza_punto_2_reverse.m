@@ -90,8 +90,8 @@ f1_times = {
     1964, 'J. Surtees',     98.800;
     1963, 'J. Clark',       98.900;
     1962, 'G. Hill',        102.300;
-    1961, 'G. Baghetti',    168.400; % Circuito di 10km
-    1960, 'P. Hill',        163.600; % Circuito di 10km
+    1961, 'G. Baghetti',    168.400; 
+    1960, 'P. Hill',        163.600; 
     1959, 'P. Hill',        100.400;
     1958, 'P. Hill',        102.900;
     1957, 'T. Brooks',      103.700;
@@ -101,7 +101,7 @@ f1_times = {
 while true
     fprintf('\n---------------------------------------------------------\n');
     fprintf('  MENU PRINCIPALE\n');
-    fprintf('    [1]  Cerca da statistiche F1 (tempi storici Monza)\n');
+    fprintf('    [1]  Cerca da statistiche F1 (giri veloci in gara: Monza)\n');
     fprintf('    [2]  Inserisci un tempo personalizzato\n');
     fprintf('    [0]  Esci\n');
     fprintf('---------------------------------------------------------\n');
@@ -126,7 +126,7 @@ while true
                 sec2mmss(ts));
         end
         fprintf('\n');
-        idx_str = input('Seleziona ID del tempo F1 (es: 1): ', 's');
+        idx_str = input('Seleziona ID del tempo o pilota F1 (es: 1): ', 's');
         idx = str2double(strtrim(idx_str));
         if isnan(idx) || idx<1 || idx>size(f1_times,1)
             fprintf('[ERRORE] ID non valido.\n'); continue;
@@ -161,7 +161,7 @@ end
 %  ══════════════════════════════════════════════════════════════
 
 function cerca_nel_dataset(T_data, T_target)
-%CERCA_NEL_DATASET  Trova le coppie (mu,W) nel dataset entro lo 0.1% dal target.
+% Trova le coppie (mu,W) nel dataset entro lo 0.1% dal target.
 
     tol = 0.001;  % tolleranza
     err_pct = abs(T_data.Tempo_s - T_target) ./ T_target;
