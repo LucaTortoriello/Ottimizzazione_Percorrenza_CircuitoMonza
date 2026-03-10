@@ -203,11 +203,11 @@ function stampa_riga(row, err_pct)
 
     % Interpretazione mu
     if mu_val >= 1.0 && mu_val <= 1.5
-        cond_str = 'Forte bagnato';
+        cond_str = 'Gomma Dura';
     elseif mu_val >= 1.6 && mu_val <= 2.5
-        cond_str = 'Pista umida';
+        cond_str = 'Gomma Media';
     elseif mu_val >= 2.6 && mu_val <= 3.5
-        cond_str = 'Gomma soft (moderno)';
+        cond_str = 'Gomma soft';
     else
         cond_str = 'Fuori range';
     end
