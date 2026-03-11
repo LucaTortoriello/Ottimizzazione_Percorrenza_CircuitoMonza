@@ -186,7 +186,7 @@ switch scelta
         fprintf('┌────────────────────────────────────────────────────────────────────┐\n');
         fprintf('│           CONFRONTO V_NODO vs RIFERIMENTO                         │\n');
         fprintf('├──────────────────┬──────────────┬──────────────┬──────────────────┤\n');
-        fprintf('│ Tratto           │  V_ref(km/h) │  V_ref(km/h) │  Delta (km/h)    │\n');
+        fprintf('│ Tratto           │  V_ref(km/h) │  V_nod(km/h) │  Delta (km/h)    │\n');
         fprintf('├──────────────────┼──────────────┼──────────────┼──────────────────┤\n');
         for j = 1:n_tratti
             delta = v_limits_kmh(j) - v_limits_ref_kmh(j);
