@@ -7,11 +7,10 @@
 % - Noi decidiamo quanto deve essere alta la velocità al nodo
 % - Vogliamo minimizzare il tempo totale sul giro.
 %
-% Il problema viene risolto con fmincon (ottimizzazione con vincoli).
 
 clear all; close all; clc;
 
-%% 1) DATI DEL CIRCUITO (come da tabella / notebook)
+%% 1) DATI DEL CIRCUITO
 % Lunghezze dei singoli tratti (metri)
 L = [324.33, 458.00, 687.00, 412.00, 229.00, 229.00, 916.00, 916.00, 705.67, 916.00]';
 
@@ -28,8 +27,7 @@ mu = 3;          % coefficiente di aderenza
 g = 9.81;        % gravità [m/s^2]
 rho = 224.62;    % raggio di curvatura
 
-% Velocità limite ai nodi (es. in curva non puoi superarla)
-% Attenzione: sono in km/h nel vettore, poi convertite in m/s dividendo per 3.6
+% Velocità limite ai nodi
 beta = sqrt(mu * rho * g)* 3.6 ;  % definito in m/s
 v_limits_ms = [90; 315; 135; 195; 170; 325; 185; beta; beta; 360.0] / 3.6;
 
@@ -96,47 +94,6 @@ fprintf('TEMPO TOTALE SUL GIRO: %.3f s\n', T_total);
 fprintf('TOP SPEED RAGGIUNTA:   %.1f km/h\n', max(v_peak_opt)*3.6);
 fprintf('VELOCITÀ MEDIA:        %.1f km/h\n', (sum(L)/T_total)*3.6);
 fprintf('====================================================================================\n');
-
-%% 6) GRAFICO VELOCITÀ vs DISTANZA
-% figure('Color', [0.1 0.1 0.1], 'Name', 'Telemetria - Punto 1');
-% ax = axes('Color', [0.15 0.15 0.15], 'XColor', 'w', 'YColor', 'w');
-% hold on; grid on;
-% ax.GridColor = [0.4 0.4 0.4];
-% 
-% curr_d = 0;      % distanza cumulativa
-% v_in_t = 0.1;    % velocità di ingresso corrente
-% 
-% for i = 1:n_tratti
-%     vp = v_peak_opt(i);
-%     vt = v_limits_ms(i);
-% 
-%     xa = x_acc(i); xc = x_const(i); xb = x_brake(i);
-% 
-%     % segmento verde: accelerazione
-%     plot([curr_d, curr_d+xa], [v_in_t, vp]*3.6, 'g', 'LineWidth', 2.5);
-% 
-%     % segmento bianco: costante
-%     plot([curr_d+xa, curr_d+xa+xc], [vp, vp]*3.6, 'w', 'LineWidth', 2.5);
-% 
-%     % segmento rosso: frenata
-%     plot([curr_d+xa+xc, curr_d+xa+xc+xb], [vp, vt]*3.6, 'r', 'LineWidth', 2.5);
-% 
-%     % linea verticale per separare i tratti
-%     line([curr_d+L(i), curr_d+L(i)], [0 400], 'Color', [0.4 0.4 0.4], 'LineStyle', ':');
-% 
-%     curr_d = curr_d + L(i);
-%     v_in_t = vt;
-% end
-% 
-% xlabel('Distanza [m]'); ylabel('Velocità [km/h]');
-% title(['Punto 1 - Lap Time: ', num2str(T_total, '%.3f'), ' s'], 'Color', 'w');
-% 
-% h = [plot(NaN,NaN,'g','LineWidth',2.5);
-%      plot(NaN,NaN,'w','LineWidth',2.5);
-%      plot(NaN,NaN,'r','LineWidth',2.5)];
-% legend(h, 'Accelerazione','Velocità Costante','Frenata', ...
-%        'TextColor', 'w', 'Color', [0.2 0.2 0.2], 'Location', 'best');
-
 
 %% ===================== FUNZIONI LOCALI =====================
 

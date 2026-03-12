@@ -72,7 +72,6 @@ for i = 1:n_tratti
     t_settore(i) = ta + tc + tb;
 
     % ---- CONSUMO ----
-    % Convertiamo in km/h perché la formula del progetto spesso è pensata così nel testo
     v_a_kmh = ((v_in_val + vp)/2) * 3.6;   % accel (velocità media)
     v_c_kmh = vp * 3.6;                    % costante
     v_b_kmh = ((vp + vt)/2) * 3.6;         % frenata (media)

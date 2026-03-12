@@ -174,7 +174,7 @@ for row_idx, (mu, W, Ts, Tm) in enumerate(results, start=2):
 # Blocca la prima riga (intestazione) durante lo scroll
 ws.freeze_panes = 'A2'
 
-# --- 5. FOGLIO INFORMATIVO (README) ---
+# --- 5. FOGLIO INFORMATIVO ---
 ws2 = wb.create_sheet("README")
 ws2['A1'] = 'DATASET MONZA - Sweep mu e W'
 ws2['A1'].font = Font(bold=True, size=14)
